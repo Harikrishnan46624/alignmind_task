@@ -1,0 +1,11 @@
+langchain 
+pypdf 
+sentence_transformers 
+google-generativeai 
+langchain-google-genai
+langchain-community
+ctransformers
+langchain
+flask
+faiss-cpu
+-e .
