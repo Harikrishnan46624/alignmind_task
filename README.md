@@ -2,7 +2,7 @@
 
 
 
-![Description of Image](Assets\chatbot_image.png)
+![Sampele Image](Assets\chatbot_image.png)
 
 
 
@@ -14,7 +14,7 @@ This project implements a Retrieval-Augmented Generation (RAG) chatbot using the
 # Project Structure
 
 ├── src
-│   ├── __init__.py          # Initializes the src module
+│   ├── __init__.py          # Initializes the src module                                                                                                                                   
 │   ├── helper.py            # Contains helper functions used across the project
 │   └── prompt.py            # Manages prompts for interacting with the LLM
 ├── static
