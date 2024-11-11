@@ -6,9 +6,18 @@ from langchain.chains import RetrievalQA
 from src.prompt import *
 import google.generativeai as genai
 from langchain_google_genai import  ChatGoogleGenerativeAI
+from dotenv import load_dotenv
+import os
 
 
 app = Flask(__name__)
+
+
+
+
+load_dotenv()
+
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 
 
 embeddings = download_hugging_face_embeddings()
@@ -17,7 +26,7 @@ embeddings = download_hugging_face_embeddings()
 DB_FAISS_PATH = 'vectorstore/db_faiss'
 
 # Load the FAISS database with the embeddings
-db = FAISS.load_local("vectorstore/db_faiss", embeddings=embeddings)
+db = FAISS.load_local("vectorstore/db_faiss", embeddings=embeddings, allow_dangerous_deserialization=True)
 
 PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
 
@@ -25,15 +34,11 @@ PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "q
 chain_type_kwargs = {"prompt": PROMPT}
 
 
-# llm = CTransformers(model=r"E:\projects\Medical-Chatbot-Project-\model\llama-2-7b-chat.ggmlv3.q2_K.bin",
-#                   model_type="llama",
-#                   config={'max_new_tokens':512,
-#                           'temperature':0.8})
+
 
 def setup_llm_model():
-  Google_Api_Key = "AIzaSyCqmUocH4Vjf2qGMwqluIxVKvLFwNBcPWU"
-  genai.configure(api_key=Google_Api_Key)
-  model = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=Google_Api_Key, temperature=0.2, convert_system_message_to_human=True)
+  genai.configure(api_key=GOOGLE_API_KEY)
+  model = ChatGoogleGenerativeAI(model="gemini-pro", google_api_key=GOOGLE_API_KEY, temperature=0.5, convert_system_message_to_human=True)
   return model
 
 
