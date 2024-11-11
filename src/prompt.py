@@ -12,3 +12,16 @@
 
 
 
+prompt_template = """
+Using only the provided context, answer the user's question directly and concisely. 
+Do not repeat the question, provide additional information, or add explanations. 
+If the context does not contain the answer, respond with "I'm not sure."
+
+Context:
+{context}
+
+Question:
+{question}
+
+Answer:
+"""
